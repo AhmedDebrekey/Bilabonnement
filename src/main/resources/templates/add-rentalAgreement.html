@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Rental — Bilabonnement</title>
+</head>
+<body>
+
+<h1>Register New Rental Agreement</h1>
+
+<form th:action="@{/rentals/save}" th:object="${rentalAgreement}" method="post">
+
+    <label>Select car</label>
+    <select th:field="*{carId}">
+        <option value="">-- Select a car --</option>
+        <option th:each="car : ${cars}"
+                th:value="${car.carId}"
+                th:text="${car.brand} + ' ' + ${car.model} + ' — ' + ${car.licensePlate}">
+        </option>
+    </select>
+
+    <label>Select customer</label>
+    <select th:field="*{customerId}">
+        <option value="">-- Select a customer --</option>
+        <option th:each="customer : ${customers}"
+                th:value="${customer.customerId}"
+                th:text="${customer.name} + ' — ' + ${customer.email}">
+        </option>
+    </select>
+
+    <label>Start date</label>
+    <input type="date" th:field="*{startDate}"/>
+
+    <label>End date</label>
+    <input type="date" th:field="*{endDate}"/>
+
+    <label>Monthly price (DKK)</label>
+    <input type="number" th:field="*{monthlyPrice}" placeholder="3199"/>
+
+    <label>Pickup location</label>
+    <input type="text" th:field="*{pickupLocation}" placeholder="Bilabonnement A/S, København"/>
+
+    <label>Status</label>
+    <select th:field="*{status}">
+        <option value="Active">Active</option>
+        <option value="Ended">Ended</option>
+        <option value="Pending">Pending</option>
+    </select>
+
+    <button type="submit">Save rental agreement</button>
+    <a href="/rentals">Cancel</a>
+
+</form>
+
+</body>
+</html>

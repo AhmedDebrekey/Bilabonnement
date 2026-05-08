@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Customer — Bilabonnement</title>
+</head>
+<body>
+
+<h1>Register New Customer</h1>
+
+<form th:action="@{/customers/save}" th:object="${customer}" method="post">
+
+    <label>Full name</label>
+    <input type="text" th:field="*{name}" placeholder="Anders Hansen"/>
+
+    <label>Email address</label>
+    <input type="email" th:field="*{email}" placeholder="anders@email.dk"/>
+
+    <label>Phone number</label>
+    <input type="tel" th:field="*{phone}" placeholder="+45 12 34 56 78"/>
+
+    <button type="submit">Save customer</button>
+    <a href="/customers">Cancel</a>
+
+</form>
+
+</body>
+</html>

@@ -24,6 +24,16 @@
         <td th:text="${damageReport.agreementId}"></td>
         <td th:text="${damageReport.reportDate}"></td>
         <td th:text="${damageReport.inspectorName}"></td>
+        <td>
+            <a th:href="@{/damage-reports/{reportId}(reportId=${damageReport.reportId})}">
+                View report
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/damages/new/{reportId}(reportId=${damageReport.reportId})}">
+                + Add damage
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

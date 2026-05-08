@@ -11,6 +11,8 @@ import java.util.List;
 public class DamageReportRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DamageRepository damageRepository;
 
     public List<DamageReport> getAll(){
         return jdbcTemplate.query("SELECT * FROM damage_reports", (rs, rowNum) -> {
@@ -30,6 +32,21 @@ public class DamageReportRepository {
                 damageReport.getAgreementId(),
                 damageReport.getReportDate(),
                 damageReport.getInspectorName()
+        );
+    }
+
+    public DamageReport getById(Integer reportId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM damage_reports WHERE report_id = ?",
+                (rs, rowNum) -> {
+                    DamageReport damageReport = new DamageReport();
+                    damageReport.setReportId(rs.getInt("report_id"));
+                    damageReport.setAgreementId(rs.getInt("agreement_id"));
+                    damageReport.setReportDate(rs.getDate("report_date").toLocalDate());
+                    damageReport.setInspectorName(rs.getString("inspector_name"));
+                    return damageReport;
+                },
+                reportId
         );
     }
 }

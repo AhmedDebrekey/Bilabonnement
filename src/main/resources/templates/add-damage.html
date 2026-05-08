@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Damage — Bilabonnement</title>
+</head>
+<body>
+
+<h1>Add Damage Item</h1>
+
+<form th:action="@{/damages/save}" th:object="${damage}" method="post">
+
+    <input type="hidden" th:field="*{reportId}"/>
+
+    <label>Damage description</label>
+    <input type="text" th:field="*{description}" placeholder="Scratched rear bumper"/>
+
+    <label>Repair price (DKK)</label>
+    <input type="number" step="0.01" th:field="*{price}" placeholder="1500"/>
+
+    <button type="submit">Save damage</button>
+    <a href="/damage-reports">Cancel</a>
+
+</form>
+
+</body>
+</html>

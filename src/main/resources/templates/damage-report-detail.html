@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Damage Report Detail — Bilabonnement</title>
+</head>
+<body>
+
+<h1>Damage Report Details</h1>
+
+<p><strong>Report ID:</strong> <span th:text="${report.reportId}"></span></p>
+<p><strong>Agreement ID:</strong> <span th:text="${report.agreementId}"></span></p>
+<p><strong>Report date:</strong> <span th:text="${report.reportDate}"></span></p>
+<p><strong>Inspector:</strong> <span th:text="${report.inspectorName}"></span></p>
+
+<h2>Damage items</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Price (DKK)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="damage : ${damages}">
+        <td th:text="${damage.description}"></td>
+        <td th:text="${damage.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p><strong>Total repair cost: </strong><span th:text="${total}"></span> DKK</p>
+
+<a th:href="@{/damages/new/{reportId}(reportId=${report.reportId})}">+ Add damage item</a>
+<a href="/damage-reports">Back to all reports</a>
+
+</body>
+</html>

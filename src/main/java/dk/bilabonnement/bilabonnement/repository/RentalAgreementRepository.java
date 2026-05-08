@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -57,5 +58,13 @@ public class RentalAgreementRepository {
                 },
                 "Ended"
         );
+    }
+
+    public Integer countActive(){
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM rental_agreements WHERE status = 'Active'", Integer.class);
+    }
+
+    public BigDecimal getTotalRevenue(){
+        return jdbcTemplate.queryForObject("SELECT SUM(monthly_price) FROM rental_agreements WHERE status = 'Active'", BigDecimal.class);
     }
 }

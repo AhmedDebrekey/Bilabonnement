@@ -2,9 +2,11 @@ package dk.bilabonnement.bilabonnement.controller;
 
 import dk.bilabonnement.bilabonnement.model.Damage;
 import dk.bilabonnement.bilabonnement.repository.DamageRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,10 @@ public class DamageController {
     }
 
     @PostMapping("/damages/save")
-    public String saveDamage(@ModelAttribute Damage damage){
+    public String saveDamage(@Valid @ModelAttribute Damage damage, BindingResult result){
+        if (result.hasErrors()){
+            return "add-damage";
+        }
         damageRepository.save(damage);
         return "redirect:/damage-reports";
     }

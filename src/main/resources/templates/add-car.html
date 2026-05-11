@@ -11,18 +11,43 @@
 
     <label>License plate</label>
     <input type="text" th:field="*{licensePlate}" placeholder="AB12345"/>
+    <span th:if="${#fields.hasErrors('licensePlate')}"
+          th:errors="*{licensePlate}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Chassis number</label>
     <input type="text" th:field="*{chassisNumber}" placeholder="WBA3A5C50DF596843"/>
+    <span th:if="${#fields.hasErrors('chassisNumber')}"
+          th:errors="*{chassisNumber}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Brand</label>
     <input type="text" th:field="*{brand}" placeholder="Toyota"/>
+    <span th:if="${#fields.hasErrors('brand')}"
+          th:errors="*{brand}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Model</label>
     <input type="text" th:field="*{model}" placeholder="Yaris"/>
+    <span th:if="${#fields.hasErrors('model')}"
+          th:errors="*{model}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Color</label>
     <input type="text" th:field="*{color}" placeholder="White"/>
+    <span th:if="${#fields.hasErrors('color')}"
+          th:errors="*{color}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Status</label>
     <select th:field="*{status}">
@@ -33,6 +58,7 @@
         <option value="Awaiting customer payment">Awaiting customer payment</option>
         <option value="Ready for sale">Ready for sale</option>
     </select>
+    <br/>
 
     <button type="submit">Save car</button>
     <a href="/cars">Cancel</a>

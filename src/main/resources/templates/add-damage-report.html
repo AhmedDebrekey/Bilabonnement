@@ -17,12 +17,23 @@
                 th:text="'Agreement #' + ${agreement.agreementId} + ' — Car ID: ' + ${agreement.carId}">
         </option>
     </select>
+    <br/>
 
     <label>Report date</label>
     <input type="date" th:field="*{reportDate}"/>
+    <span th:if="${#fields.hasErrors('reportDate')}"
+          th:errors="*{reportDate}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Inspector name</label>
     <input type="text" th:field="*{inspectorName}" placeholder="John Smith"/>
+    <span th:if="${#fields.hasErrors('inspectorName')}"
+          th:errors="*{inspectorName}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <button type="submit">Save damage report</button>
     <a href="/damage-reports">Cancel</a>

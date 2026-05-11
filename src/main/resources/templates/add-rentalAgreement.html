@@ -17,6 +17,7 @@
                 th:text="${car.brand} + ' ' + ${car.model} + ' — ' + ${car.licensePlate}">
         </option>
     </select>
+    <br/>
 
     <label>Select customer</label>
     <select th:field="*{customerId}">
@@ -26,18 +27,39 @@
                 th:text="${customer.name} + ' — ' + ${customer.email}">
         </option>
     </select>
+    <br/>
 
     <label>Start date</label>
     <input type="date" th:field="*{startDate}"/>
+    <span th:if="${#fields.hasErrors('startDate')}"
+          th:errors="*{startDate}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>End date</label>
     <input type="date" th:field="*{endDate}"/>
+    <span th:if="${#fields.hasErrors('endDate')}"
+          th:errors="*{endDate}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Monthly price (DKK)</label>
     <input type="number" th:field="*{monthlyPrice}" placeholder="3199"/>
+    <span th:if="${#fields.hasErrors('monthlyPrice')}"
+          th:errors="*{monthlyPrice}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Pickup location</label>
     <input type="text" th:field="*{pickupLocation}" placeholder="Bilabonnement A/S, København"/>
+    <span th:if="${#fields.hasErrors('pickupLocation')}"
+          th:errors="*{pickupLocation}"
+          style="color:red;">
+    </span>
+    <br/>
 
     <label>Status</label>
     <select th:field="*{status}">
@@ -45,6 +67,7 @@
         <option value="Ended">Ended</option>
         <option value="Pending">Pending</option>
     </select>
+    <br/>
 
     <button type="submit">Save rental agreement</button>
     <a href="/rentals">Cancel</a>

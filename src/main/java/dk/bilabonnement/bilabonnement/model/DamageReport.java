@@ -1,11 +1,18 @@
 package dk.bilabonnement.bilabonnement.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class DamageReport {
     private Integer reportId;
     private Integer agreementId;
+
+    @NotNull(message = "Must enter a report date")
     private LocalDate reportDate;
+
+    @NotBlank(message = "Inspector name is required")
     private String inspectorName;
 
     public DamageReport() {

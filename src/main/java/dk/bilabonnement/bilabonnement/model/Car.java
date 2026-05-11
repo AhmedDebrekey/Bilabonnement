@@ -1,12 +1,31 @@
 package dk.bilabonnement.bilabonnement.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import java.beans.Transient;
+
 public class Car {
     private Integer carId;
+
+    @NotBlank(message = "License plate is required")
+    @Size(max=16, message = "Licence plate must be maximum 16 chars long")
     private String licensePlate;
+
+    @NotBlank(message = "Chassis number is required")
+    @Size(max =17, message = "Chassis number must be maximum 17 chars long") // for my sake I am making it so that it can be less than 17
     private String chassisNumber;
+
+    @NotBlank(message = "Branch is required")
     private String brand;
+
+    @NotBlank(message = "Model is required")
     private String model;
+
+    @NotBlank(message = "Color is required")
     private String color;
+
+    @NotBlank(message = "Status is required")
     private String status;
 
     public Car() {

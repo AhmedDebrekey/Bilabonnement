@@ -5,9 +5,11 @@ import dk.bilabonnement.bilabonnement.model.DamageReport;
 import dk.bilabonnement.bilabonnement.repository.DamageReportRepository;
 import dk.bilabonnement.bilabonnement.repository.DamageRepository;
 import dk.bilabonnement.bilabonnement.repository.RentalAgreementRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +42,11 @@ public class DamageReportController {
     }
 
     @PostMapping("/damage-reports/save")
-    public String saveDamageReport(@ModelAttribute DamageReport damageReport){
+    public String saveDamageReport(@Valid @ModelAttribute DamageReport damageReport, BindingResult result, Model model){
+        if (result.hasErrors()){
+            model.addAttribute("endedAgreements", rentalAgreementRepository.getEndedAgreements());
+            return "add-damage-report";
+        }
         damageReportRepository.save(damageReport);
         return "redirect:/damage-reports";
     }

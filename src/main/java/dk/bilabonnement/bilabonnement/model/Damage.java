@@ -1,11 +1,20 @@
 package dk.bilabonnement.bilabonnement.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 public class Damage {
     private Integer damageId;
     private Integer reportId;
+
+    @NotBlank(message = "Description is required")
     private String description;
+
+    @NotNull(message = "Price is required")
+    @Positive
     private BigDecimal price;
 
     public Damage() {

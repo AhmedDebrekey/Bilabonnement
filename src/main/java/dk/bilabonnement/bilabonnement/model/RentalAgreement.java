@@ -1,5 +1,9 @@
 package dk.bilabonnement.bilabonnement.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -7,10 +11,21 @@ public class RentalAgreement {
     private Integer agreementId;
     private Integer carId;
     private Integer customerId;
+
+    @NotNull(message = "Must enter a start date")
     private LocalDate startDate;
+
+    @NotNull(message = "Must enter an end date")
     private LocalDate endDate;
+
+    @NotNull(message = "Monthly price is required")
+    @Positive
     private BigDecimal monthlyPrice;
+
+    @NotBlank(message = "Pickup location is required")
     private String pickupLocation;
+
+    @NotBlank(message = "Status is required")
     private String status;
 
     public RentalAgreement() {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cars — Bilabonnement</title>
+</head>
+<body>
+
+<h1>All Cars</h1>
+
+<a href="/cars/new">+ Add new car</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>License plate</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Chassis number</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.licensePlate}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.color}"></td>
+        <td th:text="${car.chassisNumber}"></td>
+        <td th:text="${car.status}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

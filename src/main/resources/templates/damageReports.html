@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Damage Reports — Bilabonnement</title>
+</head>
+<body>
+
+<h1>All Damage Reports</h1>
+
+<a href="/damage-reports/new">+ Add new damage report</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Report ID</th>
+        <th>Agreement ID</th>
+        <th>Report date</th>
+        <th>Inspector name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="damageReport : ${damageReports}">
+        <td th:text="${damageReport.reportId}"></td>
+        <td th:text="${damageReport.agreementId}"></td>
+        <td th:text="${damageReport.reportDate}"></td>
+        <td th:text="${damageReport.inspectorName}"></td>
+        <td>
+            <a th:href="@{/damage-reports/{reportId}(reportId=${damageReport.reportId})}">
+                View report
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/damages/new/{reportId}(reportId=${damageReport.reportId})}">
+                + Add damage
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

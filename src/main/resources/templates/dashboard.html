@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard — Bilabonnement</title>
+</head>
+<body>
+
+<h1>Bilabonnement Dashboard</h1>
+
+<h2>Overview</h2>
+
+<p>Cars currently rented out: <strong th:text="${active}"></strong></p>
+<p>Total monthly revenue: <strong th:text="${totalRevenue}"></strong> DKK</p>
+
+<h2>Navigation</h2>
+<ul>
+    <li><a href="/cars">Cars</a></li>
+    <li><a href="/customers">Customers</a></li>
+    <li><a href="/rentals">Rental agreements</a></li>
+    <li><a href="/damage-reports">Damage reports</a></li>
+</ul>
+
+</body>
+</html>

@@ -2,68 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Car — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>Add New Car</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/cars/save}" th:object="${car}" method="post">
+<div class="container">
+    <h1>Add New Car</h1>
 
-    <label>License plate</label>
-    <input type="text" th:field="*{licensePlate}" placeholder="AB12345"/>
-    <span th:if="${#fields.hasErrors('licensePlate')}"
-          th:errors="*{licensePlate}"
-          style="color:red;">
-    </span>
-    <br/>
+    <div class="card">
+        <form th:action="@{/cars/save}" th:object="${car}" method="post">
 
-    <label>Chassis number</label>
-    <input type="text" th:field="*{chassisNumber}" placeholder="WBA3A5C50DF596843"/>
-    <span th:if="${#fields.hasErrors('chassisNumber')}"
-          th:errors="*{chassisNumber}"
-          style="color:red;">
-    </span>
-    <br/>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>License plate</label>
+                    <input type="text" th:field="*{licensePlate}" placeholder="AB12345"/>
+                    <span th:if="${#fields.hasErrors('licensePlate')}"
+                          th:errors="*{licensePlate}" class="error"></span>
+                </div>
 
-    <label>Brand</label>
-    <input type="text" th:field="*{brand}" placeholder="Toyota"/>
-    <span th:if="${#fields.hasErrors('brand')}"
-          th:errors="*{brand}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Chassis number</label>
+                    <input type="text" th:field="*{chassisNumber}" placeholder="WBA3A5C50DF596843"/>
+                    <span th:if="${#fields.hasErrors('chassisNumber')}"
+                          th:errors="*{chassisNumber}" class="error"></span>
+                </div>
 
-    <label>Model</label>
-    <input type="text" th:field="*{model}" placeholder="Yaris"/>
-    <span th:if="${#fields.hasErrors('model')}"
-          th:errors="*{model}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" th:field="*{brand}" placeholder="Toyota"/>
+                    <span th:if="${#fields.hasErrors('brand')}"
+                          th:errors="*{brand}" class="error"></span>
+                </div>
 
-    <label>Color</label>
-    <input type="text" th:field="*{color}" placeholder="White"/>
-    <span th:if="${#fields.hasErrors('color')}"
-          th:errors="*{color}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Model</label>
+                    <input type="text" th:field="*{model}" placeholder="Yaris"/>
+                    <span th:if="${#fields.hasErrors('model')}"
+                          th:errors="*{model}" class="error"></span>
+                </div>
 
-    <label>Status</label>
-    <select th:field="*{status}">
-        <option value="Available">Available</option>
-        <option value="Rented">Rented</option>
-        <option value="Awaiting inspection">Awaiting inspection</option>
-        <option value="Awaiting FDM report">Awaiting FDM report</option>
-        <option value="Awaiting customer payment">Awaiting customer payment</option>
-        <option value="Ready for sale">Ready for sale</option>
-    </select>
-    <br/>
+                <div class="form-group">
+                    <label>Color</label>
+                    <input type="text" th:field="*{color}" placeholder="White"/>
+                    <span th:if="${#fields.hasErrors('color')}"
+                          th:errors="*{color}" class="error"></span>
+                </div>
 
-    <button type="submit">Save car</button>
-    <a href="/cars">Cancel</a>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select th:field="*{status}">
+                        <option value="Available">Available</option>
+                        <option value="Rented">Rented</option>
+                        <option value="Awaiting inspection">Awaiting inspection</option>
+                        <option value="Awaiting FDM report">Awaiting FDM report</option>
+                        <option value="Awaiting customer payment">Awaiting customer payment</option>
+                        <option value="Ready for sale">Ready for sale</option>
+                    </select>
+                </div>
+            </div>
 
-</form>
+            <div style="display:flex; gap:10px; margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">Save car</button>
+                <a href="/cars" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

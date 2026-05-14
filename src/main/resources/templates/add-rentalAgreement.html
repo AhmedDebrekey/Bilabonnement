@@ -2,77 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Rental — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>Register New Rental Agreement</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/rentals/save}" th:object="${rentalAgreement}" method="post">
+<div class="container">
+    <h1>Register New Rental Agreement</h1>
 
-    <label>Select car</label>
-    <select th:field="*{carId}">
-        <option value="">-- Select a car --</option>
-        <option th:each="car : ${cars}"
-                th:value="${car.carId}"
-                th:text="${car.brand} + ' ' + ${car.model} + ' — ' + ${car.licensePlate}">
-        </option>
-    </select>
-    <br/>
+    <div class="card">
+        <form th:action="@{/rentals/save}" th:object="${rentalAgreement}" method="post">
 
-    <label>Select customer</label>
-    <select th:field="*{customerId}">
-        <option value="">-- Select a customer --</option>
-        <option th:each="customer : ${customers}"
-                th:value="${customer.customerId}"
-                th:text="${customer.name} + ' — ' + ${customer.email}">
-        </option>
-    </select>
-    <br/>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Select car</label>
+                    <select th:field="*{carId}">
+                        <option value="">-- Select a car --</option>
+                        <option th:each="car : ${cars}"
+                                th:value="${car.carId}"
+                                th:text="${car.brand} + ' ' + ${car.model} + ' — ' + ${car.licensePlate}">
+                        </option>
+                    </select>
+                </div>
 
-    <label>Start date</label>
-    <input type="date" th:field="*{startDate}"/>
-    <span th:if="${#fields.hasErrors('startDate')}"
-          th:errors="*{startDate}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Select customer</label>
+                    <select th:field="*{customerId}">
+                        <option value="">-- Select a customer --</option>
+                        <option th:each="customer : ${customers}"
+                                th:value="${customer.customerId}"
+                                th:text="${customer.name} + ' — ' + ${customer.email}">
+                        </option>
+                    </select>
+                </div>
 
-    <label>End date</label>
-    <input type="date" th:field="*{endDate}"/>
-    <span th:if="${#fields.hasErrors('endDate')}"
-          th:errors="*{endDate}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Start date</label>
+                    <input type="date" th:field="*{startDate}"/>
+                    <span th:if="${#fields.hasErrors('startDate')}"
+                          th:errors="*{startDate}" class="error"></span>
+                </div>
 
-    <label>Monthly price (DKK)</label>
-    <input type="number" th:field="*{monthlyPrice}" placeholder="3199"/>
-    <span th:if="${#fields.hasErrors('monthlyPrice')}"
-          th:errors="*{monthlyPrice}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>End date</label>
+                    <input type="date" th:field="*{endDate}"/>
+                    <span th:if="${#fields.hasErrors('endDate')}"
+                          th:errors="*{endDate}" class="error"></span>
+                </div>
 
-    <label>Pickup location</label>
-    <input type="text" th:field="*{pickupLocation}" placeholder="Bilabonnement A/S, København"/>
-    <span th:if="${#fields.hasErrors('pickupLocation')}"
-          th:errors="*{pickupLocation}"
-          style="color:red;">
-    </span>
-    <br/>
+                <div class="form-group">
+                    <label>Monthly price (DKK)</label>
+                    <input type="number" th:field="*{monthlyPrice}" placeholder="6767"/>
+                    <span th:if="${#fields.hasErrors('monthlyPrice')}"
+                          th:errors="*{monthlyPrice}" class="error"></span>
+                </div>
 
-    <label>Status</label>
-    <select th:field="*{status}">
-        <option value="Active">Active</option>
-        <option value="Ended">Ended</option>
-        <option value="Pending">Pending</option>
-    </select>
-    <br/>
+                <div class="form-group">
+                    <label>Pickup location</label>
+                    <input type="text" th:field="*{pickupLocation}" placeholder="Bilabonnement, København"/>
+                    <span th:if="${#fields.hasErrors('pickupLocation')}"
+                          th:errors="*{pickupLocation}" class="error"></span>
+                </div>
 
-    <button type="submit">Save rental agreement</button>
-    <a href="/rentals">Cancel</a>
+            </div>
 
-</form>
+            <div style="display:flex; gap:10px; margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">Save rental agreement</button>
+                <a href="/rentals" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

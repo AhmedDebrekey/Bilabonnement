@@ -2,41 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Damage Reports — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>All Damage Reports</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<a href="/damage-reports/new">+ Add new damage report</a>
+<div class="container">
+    <div class="page-header">
+        <h1>Damage Reports</h1>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Report ID</th>
-        <th>Agreement ID</th>
-        <th>Report date</th>
-        <th>Inspector name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="damageReport : ${damageReports}">
-        <td th:text="${damageReport.reportId}"></td>
-        <td th:text="${damageReport.agreementId}"></td>
-        <td th:text="${damageReport.reportDate}"></td>
-        <td th:text="${damageReport.inspectorName}"></td>
-        <td>
-            <a th:href="@{/damage-reports/{reportId}(reportId=${damageReport.reportId})}">
-                View report
-            </a>
-        </td>
-        <td>
-            <a th:href="@{/damages/new/{reportId}(reportId=${damageReport.reportId})}">
-                + Add damage
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>Car</th>
+            <th>Customer</th>
+            <th>Rental period</th>
+            <th>Report status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agreement : ${endedAgreements}">
+            <td th:text="${carMap[agreement.carId].brand} + ' ' + ${carMap[agreement.carId].model} + ' — ' + ${carMap[agreement.carId].licensePlate}"></td>
+            <td th:text="${customerMap[agreement.customerId].name}"></td>
+            <td th:text="${agreement.startDate} + ' → ' + ${agreement.endDate}"></td>
+            <td>
+                    <span th:if="${reportMap[agreement.agreementId] != null}"
+                          class="badge badge-active">Report done</span>
+                <span th:if="${reportMap[agreement.agreementId] == null}"
+                      class="badge badge-awaiting">No report yet</span>
+            </td>
+            <td>
+                <div class="actions-cell">
+                    <a th:if="${reportMap[agreement.agreementId] != null}"
+                       th:href="@{/damage-reports/{reportId}(reportId=${reportMap[agreement.agreementId].reportId})}"
+                       class="btn btn-sm btn-secondary">View report</a>
+                    <a th:if="${reportMap[agreement.agreementId] == null}"
+                       th:href="@{/damage-reports/new/{agreementId}(agreementId=${agreement.agreementId})}"
+                       class="btn btn-sm btn-primary">Create report</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

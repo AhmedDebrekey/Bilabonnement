@@ -1,6 +1,7 @@
 package dk.bilabonnement.bilabonnement.repository;
 
 import dk.bilabonnement.bilabonnement.model.Car;
+import dk.bilabonnement.bilabonnement.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -37,5 +38,61 @@ public class CarRepository {
                 car.getColor(),
                 car.getStatus()
         );
+    }
+
+    public void updateStatus(Integer carId, String status) {
+        jdbcTemplate.update(
+                "UPDATE cars SET status = ? WHERE car_id = ?",
+                status, carId
+        );
+    }
+
+    public List<Car> getAvailableCars() {
+        return jdbcTemplate.query(
+                "SELECT * FROM cars WHERE status = 'Available'",
+                (rs, rowNum) -> {
+                    Car car = new Car();
+                    car.setCarId(rs.getInt("car_id"));
+                    car.setLicensePlate(rs.getString("license_plate"));
+                    car.setChassisNumber(rs.getString("chassis_number"));
+                    car.setBrand(rs.getString("brand"));
+                    car.setModel(rs.getString("model"));
+                    car.setColor(rs.getString("color"));
+                    car.setStatus(rs.getString("status"));
+                    return car;
+                }
+        );
+    }
+
+    public Integer countTotalCars() {
+        return jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM cars",
+                Integer.class
+        );
+    }
+
+    public void delete(Integer carId) {
+        jdbcTemplate.update(
+                "DELETE FROM cars WHERE car_id = ?",
+                carId
+        );
+    }
+
+    public Car getById(Integer carId) {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM cars WHERE car_id = ?",
+                    (rs, rowNum) -> {
+                        Car car = new Car();
+                        car.setCarId(rs.getInt("car_id"));
+                        car.setLicensePlate(rs.getString("license_plate"));
+                        car.setChassisNumber(rs.getString("chassis_number"));
+                        car.setBrand(rs.getString("brand"));
+                        car.setModel(rs.getString("model"));
+                        car.setColor(rs.getString("color"));
+                        car.setStatus(rs.getString("status"));
+                        return car;
+                    },
+                    carId
+            );
     }
 }

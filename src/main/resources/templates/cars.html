@@ -2,35 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cars — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>All Cars</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<a href="/cars/new">+ Add new car</a>
+<div class="container">
+    <div class="page-header">
+        <h1>All Cars</h1>
+        <a href="/cars/new" class="btn btn-primary">+ Add new car</a>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>License plate</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Color</th>
-        <th>Chassis number</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car : ${cars}">
-        <td th:text="${car.licensePlate}"></td>
-        <td th:text="${car.brand}"></td>
-        <td th:text="${car.model}"></td>
-        <td th:text="${car.color}"></td>
-        <td th:text="${car.chassisNumber}"></td>
-        <td th:text="${car.status}"></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>License plate</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Chassis number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.licensePlate}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.color}"></td>
+            <td th:text="${car.chassisNumber}"></td>
+            <td th:text="${car.status}"></td>
+            <td>
+                <a th:href="@{/cars/delete/{carId}(carId=${car.carId})}"
+                   class="btn btn-sm btn-secondary"
+                   onclick="return confirm('Are you sure you want to delete this car?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

@@ -31,4 +31,26 @@ public class CustomerRepository {
                     customer.getPhone()
                 );
     }
+
+    public Integer countTotalCustomers() {
+        return jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM customers",
+                Integer.class
+        );
+    }
+
+    public Customer getById(Integer customerId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM customers WHERE customer_id = ?",
+                (rs, rowNum) -> {
+                    Customer customer = new Customer();
+                    customer.setCustomerId(rs.getInt("customer_id"));
+                    customer.setName(rs.getString("name"));
+                    customer.setEmail(rs.getString("email"));
+                    customer.setPhone(rs.getString("phone"));
+                    return customer;
+                },
+                customerId
+        );
+    }
 }

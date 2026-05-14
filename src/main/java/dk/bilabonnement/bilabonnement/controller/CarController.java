@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -40,6 +41,12 @@ public class CarController {
             return "add-car";
         }
         carRepository.save(car);
+        return "redirect:/cars";
+    }
+
+    @GetMapping("/cars/delete/{carId}")
+    public String deleteCar(@PathVariable Integer carId) {
+        carRepository.delete(carId);
         return "redirect:/cars";
     }
 }

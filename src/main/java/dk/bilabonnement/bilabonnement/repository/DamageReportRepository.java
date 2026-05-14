@@ -49,4 +49,24 @@ public class DamageReportRepository {
                 reportId
         );
     }
+
+    public DamageReport getByAgreementId(Integer agreementId) {
+        try {
+            List<DamageReport> reports = jdbcTemplate.query(
+                    "SELECT * FROM damage_reports WHERE agreement_id = ? LIMIT 1",
+                    (rs, rowNum) -> {
+                        DamageReport damageReport = new DamageReport();
+                        damageReport.setReportId(rs.getInt("report_id"));
+                        damageReport.setAgreementId(rs.getInt("agreement_id"));
+                        damageReport.setReportDate(rs.getDate("report_date").toLocalDate());
+                        damageReport.setInspectorName(rs.getString("inspector_name"));
+                        return damageReport;
+                    },
+                    agreementId
+            );
+            return reports.isEmpty() ? null : reports.get(0);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

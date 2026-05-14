@@ -2,39 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Rentals — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>All Rental Agreements</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<a href="/rentals/new">+ Add new rental</a>
+<div class="container">
+    <div class="page-header">
+        <h1>All Rental Agreements</h1>
+        <a href="/rentals/new" class="btn btn-primary">+ Add new rental</a>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Car ID</th>
-        <th>Customer ID</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Monthly price</th>
-        <th>Pickup location</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="rentalAgreement : ${rentalAgreements}">
-        <td th:text="${rentalAgreement.agreementId}"></td>
-        <td th:text="${rentalAgreement.carId}"></td>
-        <td th:text="${rentalAgreement.customerId}"></td>
-        <td th:text="${rentalAgreement.startDate}"></td>
-        <td th:text="${rentalAgreement.endDate}"></td>
-        <td th:text="${rentalAgreement.monthlyPrice}"></td>
-        <td th:text="${rentalAgreement.pickupLocation}"></td>
-        <td th:text="${rentalAgreement.status}"></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Car</th>
+            <th>Customer</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Monthly price</th>
+            <th>Pickup location</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rentalAgreement : ${rentalAgreements}">
+            <td th:text="${rentalAgreement.agreementId}"></td>
+            <td th:text="${carNames[rentalAgreement.carId]}"></td>
+            <td th:text="${customerNames[rentalAgreement.customerId]}"></td>
+            <td th:text="${rentalAgreement.startDate}"></td>
+            <td th:text="${rentalAgreement.endDate}"></td>
+            <td th:text="${rentalAgreement.monthlyPrice}"></td>
+            <td th:text="${rentalAgreement.pickupLocation}"></td>
+            <td th:text="${rentalAgreement.status}"></td>
+            <td>
+                <a th:if="${rentalAgreement.status == 'Active'}"
+                   th:href="@{/rentals/{agreementId}/end(agreementId=${rentalAgreement.agreementId})}"
+                   class="btn btn-sm btn-secondary"
+                   onclick="return confirm('Are you sure you want to end this rental?')">
+                    End rental
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

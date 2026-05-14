@@ -2,43 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Damage Report — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>Register Damage Report</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/damage-reports/save}" th:object="${damageReport}" method="post">
+<div class="container">
+    <h1>Register Damage Report</h1>
 
-    <label>Select ended rental agreement</label>
-    <select th:field="*{agreementId}">
-        <option value="">-- Select a rental agreement --</option>
-        <option th:each="agreement : ${endedAgreements}"
-                th:value="${agreement.agreementId}"
-                th:text="'Agreement #' + ${agreement.agreementId} + ' — Car ID: ' + ${agreement.carId}">
-        </option>
-    </select>
-    <br/>
+    <div class="card">
+        <form th:action="@{/damage-reports/save}" th:object="${damageReport}" method="post">
 
-    <label>Report date</label>
-    <input type="date" th:field="*{reportDate}"/>
-    <span th:if="${#fields.hasErrors('reportDate')}"
-          th:errors="*{reportDate}"
-          style="color:red;">
-    </span>
-    <br/>
+            <input type="hidden" th:field="*{agreementId}"/>
 
-    <label>Inspector name</label>
-    <input type="text" th:field="*{inspectorName}" placeholder="John Smith"/>
-    <span th:if="${#fields.hasErrors('inspectorName')}"
-          th:errors="*{inspectorName}"
-          style="color:red;">
-    </span>
-    <br/>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Report date</label>
+                    <input type="date" th:field="*{reportDate}"/>
+                    <span th:if="${#fields.hasErrors('reportDate')}"
+                          th:errors="*{reportDate}" class="error"></span>
+                </div>
 
-    <button type="submit">Save damage report</button>
-    <a href="/damage-reports">Cancel</a>
+                <div class="form-group">
+                    <label>Inspector name</label>
+                    <input type="text" th:field="*{inspectorName}" placeholder="John Smith"/>
+                    <span th:if="${#fields.hasErrors('inspectorName')}"
+                          th:errors="*{inspectorName}" class="error"></span>
+                </div>
+            </div>
 
-</form>
+            <div style="display:flex; gap:10px; margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">Save damage report</button>
+                <a href="/damage-reports" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

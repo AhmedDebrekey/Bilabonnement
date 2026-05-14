@@ -2,23 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>Bilabonnement Dashboard</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h2>Overview</h2>
+<div class="container">
+    <h1>Dashboard</h1>
 
-<p>Cars currently rented out: <strong th:text="${active}"></strong></p>
-<p>Total monthly revenue: <strong th:text="${totalRevenue}"></strong> DKK</p>
-
-<h2>Navigation</h2>
-<ul>
-    <li><a href="/cars">Cars</a></li>
-    <li><a href="/customers">Customers</a></li>
-    <li><a href="/rentals">Rental agreements</a></li>
-    <li><a href="/damage-reports">Damage reports</a></li>
-</ul>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p>Cars currently rented out</p>
+            <h2 th:text="${active}"></h2>
+        </div>
+        <div class="stat-card">
+            <p>Total monthly revenue</p>
+            <h2><span th:text="${totalRevenue}"></span> DKK</h2>
+        </div>
+        <div class="stat-card">
+            <p>Total cars in system</p>
+            <h2 th:text="${totalCars}"></h2>
+        </div>
+        <div class="stat-card">
+            <p>Total customers</p>
+            <h2 th:text="${totalCustomers}"></h2>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

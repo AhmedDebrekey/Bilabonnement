@@ -25,7 +25,6 @@ public class RentalAgreement {
     @NotBlank(message = "Pickup location is required")
     private String pickupLocation;
 
-    @NotBlank(message = "Status is required")
     private String status;
 
     public RentalAgreement() {

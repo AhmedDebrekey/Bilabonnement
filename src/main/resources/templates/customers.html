@@ -2,31 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Customers — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>All Customers</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<a href="/customers/new">+ Add new customer</a>
+<div class="container">
+    <div class="page-header">
+        <h1>All Customers</h1>
+        <a href="/customers/new" class="btn btn-primary">+ Add new customer</a>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.customerId}"></td>
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.email}"></td>
-        <td th:text="${customer.phone}"></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.customerId}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

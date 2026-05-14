@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class DamageReport {
     private Integer reportId;
+
+    @NotNull(message = "Agreement is required")
     private Integer agreementId;
 
     @NotNull(message = "Must enter a report date")

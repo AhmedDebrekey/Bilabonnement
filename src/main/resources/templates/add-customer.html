@@ -2,41 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Customer — Bilabonnement</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
 
-<h1>Register New Customer</h1>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/customers/save}" th:object="${customer}" method="post">
+<div class="container">
+    <h1>Register New Customer</h1>
 
-    <label>Full name</label>
-    <input type="text" th:field="*{name}" placeholder="Anders Hansen"/>
-    <span th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}"
-          style="color:red;">
-    </span>
-    <br/>
+    <div class="card">
+        <form th:action="@{/customers/save}" th:object="${customer}" method="post">
 
-    <label>Email address</label>
-    <input type="email" th:field="*{email}" placeholder="anders@email.dk"/>
-    <span th:if="${#fields.hasErrors('email')}"
-          th:errors="*{email}"
-          style="color:red;">
-    </span>
-    <br/>
+            <div class="form-group">
+                <label>Full name</label>
+                <input type="text" th:field="*{name}" placeholder="Anders Hansen"/>
+                <span th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}" class="error"></span>
+            </div>
 
-    <label>Phone number</label>
-    <input type="tel" th:field="*{phone}" placeholder="+45 12 34 56 78"/>
-    <span th:if="${#fields.hasErrors('phone')}"
-          th:errors="*{phone}"
-          style="color:red;">
-    </span>
-    <br/>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" th:field="*{email}" placeholder="anders@email.dk"/>
+                    <span th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}" class="error"></span>
+                </div>
 
-    <button type="submit">Save customer</button>
-    <a href="/customers">Cancel</a>
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input type="tel" th:field="*{phone}" placeholder="+45 12 34 56 78"/>
+                    <span th:if="${#fields.hasErrors('phone')}"
+                          th:errors="*{phone}" class="error"></span>
+                </div>
+            </div>
 
-</form>
+            <div style="display:flex; gap:10px; margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">Save customer</button>
+                <a href="/customers" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

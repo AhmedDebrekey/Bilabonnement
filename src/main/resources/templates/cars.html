@@ -33,7 +33,14 @@
             <td th:text="${car.model}"></td>
             <td th:text="${car.color}"></td>
             <td th:text="${car.chassisNumber}"></td>
-            <td th:text="${car.status}"></td>
+            <td>
+            <span th:text="${car.status}"
+                  th:class="${car.status == 'Available'} ? 'badge badge-available' :
+                            (${car.status == 'Rented'} ? 'badge badge-rented' :
+                            (${car.status == 'Awaiting inspection'} ? 'badge badge-awaiting' :
+                            'badge badge-ended'))">
+            </span>
+            </td>
             <td>
                 <a th:href="@{/cars/delete/{carId}(carId=${car.carId})}"
                    class="btn btn-sm btn-secondary"

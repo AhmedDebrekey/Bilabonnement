@@ -150,6 +150,11 @@ tr:hover td {
     background-color: #fafafa;
 }
 
+.overdue-row td {
+    background-color: #fadbd8;
+    color: #922b21;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;

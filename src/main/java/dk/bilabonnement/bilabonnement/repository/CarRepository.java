@@ -95,4 +95,12 @@ public class CarRepository {
                     carId
             );
     }
+
+    public Integer countByStatus(String status) {
+        return jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM cars WHERE status = ?",
+                Integer.class,
+                status
+        );
+    }
 }

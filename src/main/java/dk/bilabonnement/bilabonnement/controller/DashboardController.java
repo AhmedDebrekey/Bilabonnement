@@ -23,6 +23,8 @@ public class DashboardController {
         model.addAttribute("totalRevenue", rentalAgreementRepository.getTotalRevenue());
         model.addAttribute("totalCars", carRepository.countTotalCars());
         model.addAttribute("totalCustomers", customerRepository.countTotalCustomers());
+        model.addAttribute("available", carRepository.countByStatus("Available"));
+        model.addAttribute("awaitingInspection", carRepository.countByStatus("Awaiting inspection"));
         return "dashboard";
     }
 
